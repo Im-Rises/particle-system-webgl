@@ -75,9 +75,15 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     auto yPos = (mode->height - display_h) / 2;
     glfwSetWindowPos(window, xPos, yPos);
 
+#ifdef __EMSCRIPTEN__
     // Initialize OpenGL loader
     if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
         exit(1);
+#else
+    // Initialize OpenGL loader
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        exit(1);
+#endif
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
