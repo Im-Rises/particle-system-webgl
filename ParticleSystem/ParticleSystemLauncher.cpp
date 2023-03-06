@@ -107,6 +107,17 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
+    // Print OpenGL version
+    printf("OpenGL vendor: %s\nOpenGL version: %s\nGLSL version: %s\nGLFW version: %s\n"
+           "Glad version: %s\nImGui version: %s\nGLM version: %s\n",
+        getOpenGLVendor().data(),
+        getOpenGLVersion().data(),
+        getGLSLVersion().data(),
+        getGLFWVersion().data(),
+        getGladVersion().data(),
+        getImGuiVersion().data(),
+        getGLMVersion().data());
+
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glEnable(GL_BLEND);
@@ -198,6 +209,9 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
         ImGui::Text("%.3f ms/frame (%.1f FPS)", deltaTime, 1.0f / deltaTime);
         ImGui::Text("Window width: %d", display_w);
         ImGui::Text("Window height: %d", display_h);
+        ImGui::Text("GPU: %s", getOpenGLVendor().data());
+        ImGui::Text("OpenGL version: %s", getOpenGLVersion().data());
+        ImGui::Text("GLSL version: %s", getGLSLVersion().data());
         ImGui::End();
     }
 
@@ -432,4 +446,32 @@ void ParticleSystemLauncher::updateScreen() {
     }
 
     glfwSwapBuffers(window);
+}
+
+std::string_view ParticleSystemLauncher::getOpenGLVendor() {
+    return reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+}
+
+std::string_view ParticleSystemLauncher::getOpenGLVersion() {
+    return reinterpret_cast<const char*>(glGetString(GL_VERSION));
+}
+
+std::string_view ParticleSystemLauncher::getGLSLVersion() {
+    return reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+}
+
+std::string ParticleSystemLauncher::getGLFWVersion() {
+    return std::to_string(GLFW_VERSION_MAJOR) + "." + std::to_string(GLFW_VERSION_MINOR) + "." + std::to_string(GLFW_VERSION_REVISION);
+}
+
+std::string_view ParticleSystemLauncher::getGladVersion() {
+    return "0.1.36";
+}
+
+std::string ParticleSystemLauncher::getImGuiVersion() {
+    return IMGUI_VERSION;
+}
+
+std::string ParticleSystemLauncher::getGLMVersion() {
+    return std::to_string(GLM_VERSION_MAJOR) + "." + std::to_string(GLM_VERSION_MINOR) + "." + std::to_string(GLM_VERSION_PATCH);
 }
