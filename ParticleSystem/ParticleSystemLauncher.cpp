@@ -1,28 +1,31 @@
 #include "ParticleSystemLauncher.h"
 
-#include <cstdio>
-#include <glad/glad.h>
+#include "InputManager.h"
+
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
-
-#include "InputManager.h"
-
+#include <cstdio>
+#include <cstdlib>
 #define GL_SILENCE_DEPRECATION
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
-
-#include <GLFW/glfw3.h>
-#include <cstdlib>
+#include <glad/glad.h>
 #include <iostream>
+#include <GLFW/glfw3.h> // Will drag system OpenGL headers
+#include "Scene/Scene.h"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include "imgui/libs/emscripten/emscripten_mainloop_stub.h"
+#endif
+
 static void glfw_error_callback(int error, const char* description) {
-    fprintf(stderr, "Glfw Error %d: %s\n", error, description);
+    fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
 
 ParticleSystemLauncher::ParticleSystemLauncher() {
@@ -128,7 +131,16 @@ void ParticleSystemLauncher::start() {
     float deltaTime;
 
     // Main loop
+#ifdef __EMSCRIPTEN__
+    // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
+    // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    io.IniFilename = NULL;
+    EMSCRIPTEN_MAINLOOP_BEGIN
+#else
     while (!glfwWindowShouldClose(window))
+#endif
     {
         deltaTime = ImGui::GetIO().DeltaTime;
 
@@ -140,6 +152,9 @@ void ParticleSystemLauncher::start() {
 
         updateScreen();
     }
+#ifdef __EMSCRIPTEN__
+    EMSCRIPTEN_MAINLOOP_END;
+#endif
 }
 
 void ParticleSystemLauncher::handleInputs() {

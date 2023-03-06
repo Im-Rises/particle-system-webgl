@@ -1,8 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "Entity/ParticleGenerator/ParticleGeneratorBillboard.h"
 #include "Camera/Camera.h"
+#include "Entity/ParticleGenerator/ParticleGeneratorBillboard.h"
 
 class Scene {
 private:

@@ -1,5 +1,7 @@
 #include "InputManager.h"
 
+#include <GLFW/glfw3.h>
+
 double InputManager::lastMouseX = 0.0;
 double InputManager::lastMouseY = 0.0;
 

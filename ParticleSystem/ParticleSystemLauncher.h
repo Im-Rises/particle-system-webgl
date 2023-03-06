@@ -2,8 +2,8 @@
 #define PARTICLE_EMISSION_H
 
 #include <memory>
+#include <string_view>
 
-#include "Scene/Scene.h"
 
 constexpr const std::string_view PROJECT_NAME = "Particle System Billboard 3D";
 
@@ -12,6 +12,8 @@ constexpr const std::string_view PROJECT_VERSION = "1.1.0";
 constexpr const std::string_view PROJECT_GITHUB = "https://github.com/Im-Rises/ParticleSystem";
 
 constexpr const std::string_view PROJECT_AUTHOR = "Im-Rises (Quentin Morel)";
+
+class Scene;
 
 struct GLFWwindow;
 
