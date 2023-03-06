@@ -20,5 +20,5 @@ add_subdirectory(ParticleSystem)
 
 if (EMSCRIPTEN)
     set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/web)
-    #    set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "index")
+    #    set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "index") # Name the output file index
 endif ()
