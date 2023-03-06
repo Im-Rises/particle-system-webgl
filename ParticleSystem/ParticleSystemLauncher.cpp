@@ -76,7 +76,7 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     glfwSetWindowPos(window, xPos, yPos);
 
     // Initialize OpenGL loader
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
         exit(1);
 
     // Setup Dear ImGui context
