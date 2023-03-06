@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "ballImage.h"
+
 const char* vertexShader="#version 300 es\n"
                            "\n"
                            "precision mediump float;\n"
@@ -50,7 +52,7 @@ const char* fragmentShader="#version 300 es\n"
 
 ParticleGeneratorBillboard::ParticleGeneratorBillboard(int maxParticles) : Entity(vertexShader,
                                                                                fragmentShader),
-                                                                           texture("textures/ball.png"),
+                                                                           texture(ballImage, ballImageSize),
                                                                            randomEngine(std::random_device()()) {
     // Init particles
     position = glm::vec3(0.0f, 0.0f, 0.0f);

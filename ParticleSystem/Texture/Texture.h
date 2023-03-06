@@ -8,9 +8,10 @@ private:
     unsigned int textureID;
     int width, height;
     int nrComponents;
+    int channels;
 
 public:
-    explicit Texture(const std::string_view& texturePath);
+    explicit Texture(const unsigned char* textureSource, int textureSourceSize);
 
     ~Texture();
 

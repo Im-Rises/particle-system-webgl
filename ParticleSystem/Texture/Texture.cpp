@@ -6,10 +6,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 
-Texture::Texture(const std::string_view& texturePath) {
+Texture::Texture(const unsigned char* textureSource, int textureSourceSize) {
     glGenTextures(1, &textureID);
 
-    unsigned char* data = stbi_load(texturePath.data(), &width, &height, &nrComponents, 0);
+//    stbi_uc* data = stbi_load_from_memory(textureSource, textureSourceSize, &width, &height, &channels, STBI_rgb_alpha);
+//    unsigned char* data = stbi_load_from_memory(textureSource, 0, &width, &height, &nrComponents, 0);
+//    unsigned char* data = stbi_load("./textures/ball.png", &width, &height, &nrComponents, 0);
+
     if (data)
     {
         GLenum format;
@@ -21,7 +24,7 @@ Texture::Texture(const std::string_view& texturePath) {
             format = GL_RGBA;
         else
         {
-            std::cout << "Texture format not supported: " << texturePath << std::endl;
+            std::cout << "Texture format not supported: " << textureSource << std::endl;
             stbi_image_free(data);
             return;
         }
@@ -40,7 +43,7 @@ Texture::Texture(const std::string_view& texturePath) {
     }
     else
     {
-        std::cout << "Texture failed to load at path: " << texturePath << std::endl;
+        std::cout << "Texture failed to load at path: " << textureSource << std::endl;
         stbi_image_free(data);
     }
 }

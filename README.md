@@ -126,6 +126,9 @@ OpenGL:
 emscripten:  
 <https://emscripten.org/docs/getting_started/downloads.html>
 
+bin2c:  
+<https://sourceforge.net/projects/bin2c/files/latest/download>  
+
 ## Documentation
 
 learnopengl (OpenGL tutorial):  
