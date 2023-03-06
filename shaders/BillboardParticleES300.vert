@@ -11,7 +11,6 @@ out vec2 v_UV;
 out vec4 v_color;
 
 uniform mat4 u_mvp;
-
 uniform vec3 u_cameraRight;
 uniform vec3 u_cameraUp;
 

@@ -75,9 +75,15 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     auto yPos = (mode->height - display_h) / 2;
     glfwSetWindowPos(window, xPos, yPos);
 
+#ifdef __EMSCRIPTEN__
+    // Initialize OpenGL loader
+    if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
+        exit(1);
+#else
     // Initialize OpenGL loader
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         exit(1);
+#endif
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -278,10 +284,10 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
         ImGui::NewLine();
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Particles count");
         ImGui::Text("Current count: %d", scene->particleGenerator.getParticlesCount());
-        static int newParticlesCount = 10000;
+        static int newParticlesCount = 1000;
         ImGui::Text("New count:");
         ImGui::SameLine();
-        ImGui::DragInt("##particlesCount", &newParticlesCount, 1, 1, 100000);
+        ImGui::DragInt("##particlesCount", &newParticlesCount, 1, 1, 1000);
         ImGui::Button("Validate##validateParticlesCount");
         if (ImGui::IsItemClicked())
         {

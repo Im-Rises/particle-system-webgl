@@ -16,9 +16,7 @@ const char* vertexShader="#version 300 es\n"
                            "out vec2 v_UV;\n"
                            "out vec4 v_color;\n"
                            "\n"
-                           "uniform mat4 u_view;\n"
-                           "uniform mat4 u_projection;\n"
-                           "\n"
+                           "uniform mat4 u_mvp;\n"
                            "uniform vec3 u_cameraRight;\n"
                            "uniform vec3 u_cameraUp;\n"
                            "\n"
@@ -27,7 +25,7 @@ const char* vertexShader="#version 300 es\n"
                            "\tvec3 billboardPos = a_position\n"
                            "\t+ u_cameraRight * a_vertice.x * a_scale.x\n"
                            "\t+ u_cameraUp * a_vertice.y * a_scale.y;\n"
-                           "\tgl_Position = u_projection * u_view * vec4(billboardPos, 1.0);\n"
+                           "\tgl_Position = u_mvp * vec4(billboardPos, 1.0);\n"
                            "\tv_UV = a_vertice.xy + vec2(0.5, 0.5);\n"
                            "\tv_color = a_color;\n"
                            "}\n\0";
@@ -139,8 +137,7 @@ void ParticleGeneratorBillboard::render(glm::mat4 cameraViewMatrix, glm::mat4 ca
 
     // Shader
     shader.use();
-    shader.setMat4("u_view", cameraViewMatrix);
-    shader.setMat4("u_projection", cameraProjectionMatrix);
+    shader.setMat4("u_mvp", cameraProjectionMatrix * cameraViewMatrix);
     shader.setVec3("u_cameraRight", cameraViewMatrix[0][0], cameraViewMatrix[1][0], cameraViewMatrix[2][0]);
     shader.setVec3("u_cameraUp", cameraViewMatrix[0][1], cameraViewMatrix[1][1], cameraViewMatrix[2][1]);
 
@@ -150,6 +147,7 @@ void ParticleGeneratorBillboard::render(glm::mat4 cameraViewMatrix, glm::mat4 ca
     // Draw
     glBindVertexArray(quadVAO);
     glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particlesCount);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindVertexArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
