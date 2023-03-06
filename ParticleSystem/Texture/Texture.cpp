@@ -8,10 +8,7 @@
 
 Texture::Texture(const unsigned char* textureSource, int textureSourceSize) {
     glGenTextures(1, &textureID);
-
-//    stbi_uc* data = stbi_load_from_memory(textureSource, textureSourceSize, &width, &height, &channels, STBI_rgb_alpha);
-//    unsigned char* data = stbi_load_from_memory(textureSource, 0, &width, &height, &nrComponents, 0);
-//    unsigned char* data = stbi_load("./textures/ball.png", &width, &height, &nrComponents, 0);
+    unsigned char* data = stbi_load_from_memory(textureSource, textureSourceSize, &width, &height, &nrComponents, 0);
 
     if (data)
     {
@@ -43,7 +40,7 @@ Texture::Texture(const unsigned char* textureSource, int textureSourceSize) {
     }
     else
     {
-        std::cout << "Texture failed to load at path: " << textureSource << std::endl;
+        std::cout << "Texture failed to read from memory: " << textureSource << std::endl;
         stbi_image_free(data);
     }
 }
