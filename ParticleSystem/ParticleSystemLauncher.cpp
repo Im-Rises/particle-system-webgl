@@ -54,6 +54,19 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // 3.0+ only
 #endif
 
+#ifdef __EMSCRIPTEN__
+    /*
+     * void emscripten_get_canvas_size(int *width, int *height, int *isFullscreen)
+     * __attribute__((deprecated("This variant does not allow specifying the target canvas",
+     * "Use emscripten_get_canvas_element_size() and emscripten_get_fullscreen_status() instead")));
+     * */
+    int canvas_width, canvas_height;
+    bool isFullscreen = false;
+    emscripten_get_canvas_size(&canvas_width, &canvas_height, &isFullscreen);
+    display_w = canvas_width;
+    display_h = canvas_height;
+#endif
+
     // Create window with graphics context
     window = glfwCreateWindow(display_w, display_h, PROJECT_NAME.data(), nullptr, nullptr);
     if (window == nullptr)
