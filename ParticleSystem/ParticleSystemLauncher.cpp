@@ -64,6 +64,7 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     //    // Initialize GLFW callbacks
     //    glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
+    //    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     //    glfwSetScrollCallback(window, InputManager::scroll_callback);
     //    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     //    glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
@@ -212,7 +213,7 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
 
     {
         static bool isWindowOpen = true;
-        ImGui::Begin("Window info", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+        ImGui::Begin("Window info", &isWindowOpen, ImGuiWindowFlags_NoResize);
         ImGui::Text("%.3f ms/frame (%.1f FPS)", deltaTime, 1.0f / deltaTime);
         ImGui::Text("Window width: %d", display_w);
         ImGui::Text("Window height: %d", display_h);
@@ -223,21 +224,21 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-            static bool isWindowOpen = true;
-        ImGui::Begin("Camera settings", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+        static bool isWindowOpen = true;
+        ImGui::Begin("Camera settings", &isWindowOpen, ImGuiWindowFlags_NoResize);
 
-//        static bool wireframe = false;
-//        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
-//        ImGui::Checkbox("Wireframe", &wireframe);
-//        if (wireframe)
-//        {
-//            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//        }
-//        else
-//        {
-//            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//        }
-//        ImGui::NewLine();
+        //        static bool wireframe = false;
+        //        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
+        //        ImGui::Checkbox("Wireframe", &wireframe);
+        //        if (wireframe)
+        //        {
+        //            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        //        }
+        //        else
+        //        {
+        //            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        //        }
+        //        ImGui::NewLine();
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Camera settings");
 
@@ -274,8 +275,8 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-            static bool isWindowOpen = true;
-        ImGui::Begin("Particle settings", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+        static bool isWindowOpen = true;
+        ImGui::Begin("Particle settings", &isWindowOpen, ImGuiWindowFlags_NoResize);
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Reset particles");
         ImGui::Button("Restart system");
@@ -435,6 +436,7 @@ void ParticleSystemLauncher::updateGame(float deltaTime) {
 void ParticleSystemLauncher::updateScreen() {
     ImGui::Render();
     glfwGetFramebufferSize(window, &display_w, &display_h);
+    std::cout << "Display size: " << display_w << "x" << display_h << std::endl;
     scene->updateProjectionMatrix(display_w, display_h);
     glViewport(0, 0, display_w, display_h);
     glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
