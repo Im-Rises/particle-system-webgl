@@ -211,7 +211,8 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     ImGui::NewFrame();
 
     {
-        ImGui::Begin("Window info");
+        static bool isWindowOpen = true;
+        ImGui::Begin("Window info", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
         ImGui::Text("%.3f ms/frame (%.1f FPS)", deltaTime, 1.0f / deltaTime);
         ImGui::Text("Window width: %d", display_w);
         ImGui::Text("Window height: %d", display_h);
@@ -222,7 +223,8 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-        ImGui::Begin("Camera settings");
+            static bool isWindowOpen = true;
+        ImGui::Begin("Camera settings", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 
 //        static bool wireframe = false;
 //        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
@@ -272,7 +274,8 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-        ImGui::Begin("Particle settings");
+            static bool isWindowOpen = true;
+        ImGui::Begin("Particle settings", &isWindowOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Reset particles");
         ImGui::Button("Restart system");
@@ -284,7 +287,7 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
         ImGui::NewLine();
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Particles count");
         ImGui::Text("Current count: %d", scene->particleGenerator.getParticlesCount());
-        static int newParticlesCount = 1000;
+        static int newParticlesCount = 10000;
         ImGui::Text("New count:");
         ImGui::SameLine();
         ImGui::DragInt("##particlesCount", &newParticlesCount, 1, 1, 1000);
