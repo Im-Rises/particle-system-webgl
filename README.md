@@ -11,9 +11,6 @@
 
 - [ ] Parallel particle update (OpenMP) ?
 - [ ] Put the UI in an init location
-- [x] Adapt canvas to screen size
-- [ ] Get canvas size using js from C++
-  code https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#interacting-with-code-call-javascript-from-native
 
 ## Description
 

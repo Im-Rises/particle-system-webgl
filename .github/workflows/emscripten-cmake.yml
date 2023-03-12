@@ -8,11 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: mymindstorm/setup-emsdk@v11
+    #    steps:
+    #      - uses: mymindstorm/setup-emsdk@v11
+    #
+    #      - name: Verify
+    #        run: emcc -v
 
-      - name: Verify
-        run: emcc -v
+    steps:
+      - uses: numworks/setup-emscripten@v1
+        with:
+          sdk: latest-fastcomp
+      - run: emcc --version
 
       - name: Checkout
         uses: actions/checkout@v2
