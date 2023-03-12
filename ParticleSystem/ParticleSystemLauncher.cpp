@@ -22,6 +22,7 @@
 
 #ifdef __EMSCRIPTEN__
 #include "imgui/libs/emscripten/emscripten_mainloop_stub.h"
+#include <emscripten/html5.h>
 #endif
 
 static void glfw_error_callback(int error, const char* description) {
@@ -55,16 +56,7 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
 #endif
 
 #ifdef __EMSCRIPTEN__
-    /*
-     * void emscripten_get_canvas_size(int *width, int *height, int *isFullscreen)
-     * __attribute__((deprecated("This variant does not allow specifying the target canvas",
-     * "Use emscripten_get_canvas_element_size() and emscripten_get_fullscreen_status() instead")));
-     * */
-    int canvas_width, canvas_height;
-    bool isFullscreen = false;
-    emscripten_get_canvas_size(&canvas_width, &canvas_height, &isFullscreen);
-    display_w = canvas_width;
-    display_h = canvas_height;
+    emscripten_get_canvas_element_size("#canvas", &display_w, &display_h);
 #endif
 
     // Create window with graphics context
@@ -448,8 +440,11 @@ void ParticleSystemLauncher::updateGame(float deltaTime) {
 
 void ParticleSystemLauncher::updateScreen() {
     ImGui::Render();
+#ifdef __EMSCRIPTEN__
+    emscripten_get_canvas_element_size("#canvas", &display_w, &display_h);
+#else
     glfwGetFramebufferSize(window, &display_w, &display_h);
-    std::cout << "Display size: " << display_w << "x" << display_h << std::endl;
+#endif
     scene->updateProjectionMatrix(display_w, display_h);
     glViewport(0, 0, display_w, display_h);
     glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
