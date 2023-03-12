@@ -9,13 +9,17 @@
 <body>
 
 <!-- Create the canvas that the C++ code will draw into -->
-<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+<canvas id="canvas"></canvas>
 
 <!-- Allow the C++ to access the canvas element -->
 <script type='text/javascript'>
     const canvas = document.getElementById('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    canvas.addEventListener('contextmenu', function (event) {
+        event.preventDefault();
+    });
 
     var Module = {
         canvas: (function () {
