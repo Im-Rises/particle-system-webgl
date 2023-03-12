@@ -24,17 +24,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    #    steps:
-    #      - uses: mymindstorm/setup-emsdk@v11
-    #
-    #      - name: Verify
-    #        run: emcc -v
-
     steps:
-      - uses: lovasoa/setup-emscripten@master
-        with:
-          emscripten-version: '1.38.47'
-      - run: emcc --version
+      - uses: mymindstorm/setup-emsdk@v11
+
+      - name: Verify
+        run: emcc -v
 
       - name: Checkout
         uses: actions/checkout@v2

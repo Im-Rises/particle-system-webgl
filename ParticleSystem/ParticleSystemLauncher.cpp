@@ -217,8 +217,12 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     ImGui::NewFrame();
 
     {
-        static bool isWindowOpen = true;
-        ImGui::Begin("Window info", &isWindowOpen, ImGuiWindowFlags_NoResize);
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, -display_h / 2), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
+        ImGui::Begin("Window info");
         ImGui::Text("%.3f ms/frame (%.1f FPS)", deltaTime, 1.0f / deltaTime);
         ImGui::Text("Window width: %d", display_w);
         ImGui::Text("Window height: %d", display_h);
@@ -229,8 +233,12 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-        static bool isWindowOpen = true;
-        ImGui::Begin("Camera settings", &isWindowOpen, ImGuiWindowFlags_NoResize);
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, (-display_h / 2) + 20), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
+        ImGui::Begin("Camera settings");
 
         //        static bool wireframe = false;
         //        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
@@ -280,8 +288,12 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
-        static bool isWindowOpen = true;
-        ImGui::Begin("Particle settings", &isWindowOpen, ImGuiWindowFlags_NoResize);
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, (-display_h / 2) + 40), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
+        ImGui::Begin("Particle settings");
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Reset particles");
         ImGui::Button("Restart system");
