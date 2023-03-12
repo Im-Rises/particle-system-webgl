@@ -7,11 +7,6 @@
       <img src="https://user-images.githubusercontent.com/59691442/190315147-ec9dc33f-0090-4f0d-98ab-514eb1463e01.png" alt="glfwLogo" style="height:60px;"/>
 </p>
 
-## TODO
-
-- [ ] Parallel particle update (OpenMP) ?
-- [ ] Put the UI in an init location
-
 ## Description
 
 This is a particle system written in C++ and compiled to WebGL using
