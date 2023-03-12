@@ -15,9 +15,9 @@ jobs:
     #        run: emcc -v
 
     steps:
-      - uses: numworks/setup-emscripten@v1
+      - uses: lovasoa/setup-emscripten@master
         with:
-          sdk: latest-fastcomp
+          emscripten-version: '1.38.47'
       - run: emcc --version
 
       - name: Checkout
