@@ -7,6 +7,11 @@
       <img src="https://user-images.githubusercontent.com/59691442/190315147-ec9dc33f-0090-4f0d-98ab-514eb1463e01.png" alt="glfwLogo" style="height:60px;"/>
 </p>
 
+## TODO
+
+- [ ] Parallel particle update (OpenMP) ?
+- [ ] Put the UI in an init location
+
 ## Description
 
 This is a particle system written in C++ and compiled to WebGL using
@@ -15,13 +20,13 @@ found [here](https://github.com/Im-Rises/Particlesystem).
 
 ## 🚀🚀[you can try the webgl build online by clicking here](https://im-rises.github.io/particle-system-webgl/) 🚀🚀
 
-## Images
+## Images and Video
 
-PLACEHOLDER
+[![Watch the video](https://user-images.githubusercontent.com/59691442/216751976-c06c492d-5dfb-466c-afe9-ec44e94e5db9.png)](https://www.youtube.com/watch?v=h5X1RaElC7Y)
 
-## Videos
+[![Watch the video](https://user-images.githubusercontent.com/59691442/216753254-f3315a71-f073-420e-b4e3-86a024913683.png)](https://www.youtube.com/watch?v=h5X1RaElC7Y)
 
-PLACEHOLDER
+Click on the images to watch the video.
 
 ## Building
 
@@ -81,6 +86,8 @@ The speed and some parameters can be modified directly in the ImGui windows.
 | Fullscreen          | F11                                 |
 | Drag particles      | Left Mouse Button + Mouse movement  |
 
+The keybinding is made for a QWERTY keyboard.
+
 ## GitHub Actions
 
 This project uses GitHub Actions to build the project and deploy it to GitHub
@@ -127,7 +134,7 @@ emscripten:
 <https://emscripten.org/docs/getting_started/downloads.html>
 
 bin2c:  
-<https://sourceforge.net/projects/bin2c/files/latest/download>  
+<https://sourceforge.net/projects/bin2c/files/latest/download>
 
 ## Documentation
 

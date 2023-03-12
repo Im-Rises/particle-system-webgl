@@ -73,11 +73,11 @@ public:
     glm::vec2 maxScale = glm::vec2(0.2f, 0.2f);
 
     bool randomizeColor = true;
-    bool randomizeColorAlpha = true;
+    bool randomizeColorAlpha = false;
     glm::vec3 fixedColor = glm::vec3(1.0f, 1.0f, 1.0f);
     glm::vec3 minColor = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 maxColor = glm::vec3(1.0f, 1.0f, 1.0f);
-    float fixedColorAlpha = 1.0f;
+    float fixedColorAlpha = 0.9f;
     float minColorAlpha = 0.0f;
     float maxColorAlpha = 1.0f;
 

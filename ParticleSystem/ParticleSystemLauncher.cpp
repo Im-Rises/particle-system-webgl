@@ -22,6 +22,7 @@
 
 #ifdef __EMSCRIPTEN__
 #include "imgui/libs/emscripten/emscripten_mainloop_stub.h"
+#include <emscripten/html5.h>
 #endif
 
 static void glfw_error_callback(int error, const char* description) {
@@ -54,6 +55,10 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // 3.0+ only
 #endif
 
+#ifdef __EMSCRIPTEN__
+    emscripten_get_canvas_element_size("#canvas", &display_w, &display_h);
+#endif
+
     // Create window with graphics context
     window = glfwCreateWindow(display_w, display_h, PROJECT_NAME.data(), nullptr, nullptr);
     if (window == nullptr)
@@ -64,6 +69,7 @@ ParticleSystemLauncher::ParticleSystemLauncher() {
     //    // Initialize GLFW callbacks
     //    glfwSetWindowUserPointer(window, this);
     glfwSetKeyCallback(window, InputManager::key_callback);
+    //    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     //    glfwSetScrollCallback(window, InputManager::scroll_callback);
     //    glfwSetCursorPosCallback(window, InputManager::cursor_position_callback);
     //    glfwSetMouseButtonCallback(window, InputManager::mouse_button_callback);
@@ -211,6 +217,11 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     ImGui::NewFrame();
 
     {
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, -display_h / 2), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
         ImGui::Begin("Window info");
         ImGui::Text("%.3f ms/frame (%.1f FPS)", deltaTime, 1.0f / deltaTime);
         ImGui::Text("Window width: %d", display_w);
@@ -222,20 +233,25 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, (-display_h / 2) + 20), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
         ImGui::Begin("Camera settings");
 
-//        static bool wireframe = false;
-//        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
-//        ImGui::Checkbox("Wireframe", &wireframe);
-//        if (wireframe)
-//        {
-//            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-//        }
-//        else
-//        {
-//            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//        }
-//        ImGui::NewLine();
+        //        static bool wireframe = false;
+        //        ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "View settings");
+        //        ImGui::Checkbox("Wireframe", &wireframe);
+        //        if (wireframe)
+        //        {
+        //            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        //        }
+        //        else
+        //        {
+        //            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        //        }
+        //        ImGui::NewLine();
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Camera settings");
 
@@ -272,6 +288,11 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
     }
 
     {
+#ifdef __EMSCRIPTEN__
+        static bool isCollapsed = true;
+        ImGui::SetNextWindowPos(ImVec2(-display_w / 2, (-display_h / 2) + 40), ImGuiCond_Once);
+        ImGui::SetNextWindowCollapsed(isCollapsed, ImGuiCond_Once);
+#endif
         ImGui::Begin("Particle settings");
 
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Reset particles");
@@ -284,7 +305,7 @@ void ParticleSystemLauncher::handleUi(float deltaTime) {
         ImGui::NewLine();
         ImGui::TextColored(ImVec4(1.0F, 0.0F, 1.0F, 1.0F), "Particles count");
         ImGui::Text("Current count: %d", scene->particleGenerator.getParticlesCount());
-        static int newParticlesCount = 1000;
+        static int newParticlesCount = 10000;
         ImGui::Text("New count:");
         ImGui::SameLine();
         ImGui::DragInt("##particlesCount", &newParticlesCount, 1, 1, 1000);
@@ -431,7 +452,11 @@ void ParticleSystemLauncher::updateGame(float deltaTime) {
 
 void ParticleSystemLauncher::updateScreen() {
     ImGui::Render();
+#ifdef __EMSCRIPTEN__
+    emscripten_get_canvas_element_size("#canvas", &display_w, &display_h);
+#else
     glfwGetFramebufferSize(window, &display_w, &display_h);
+#endif
     scene->updateProjectionMatrix(display_w, display_h);
     glViewport(0, 0, display_w, display_h);
     glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
