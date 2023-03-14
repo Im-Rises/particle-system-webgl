@@ -33,11 +33,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      #      - name: Build
-      #        run: |
-      #          emcmake cmake .
-      #          emmake make
-      #          rm ./web/particle-simulator-webgl.html
+      - name: Build
+        run: |
+          emcmake cmake .
+          emmake make
 
       - name: Setup Pages
         uses: actions/configure-pages@v3

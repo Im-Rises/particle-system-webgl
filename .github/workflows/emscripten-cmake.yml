@@ -22,8 +22,8 @@ jobs:
           emcmake cmake .
           emmake make
 
-#      - name: Upload to branch
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: emscripten-cmake
-#          path: build-commandline
+      - name: Upload to branch
+        uses: actions/upload-artifact@v2
+        with:
+          name: emscripten-cmake
+          path: build-commandline
