@@ -23,6 +23,21 @@ found [here](https://github.com/Im-Rises/Particlesystem).
 
 Click on the images to watch the video.
 
+## Dependencies
+
+- C++ 14
+- C++ compiler (MSVC, Mingw, ...)
+- CMake
+- Glad
+- GLFW (3.3.8)
+- OpenGl (3.3)
+- Dear ImGui (1.88.4)
+- glm (0.9.8.5)
+- stb (2.28)
+
+> **Note**  
+> Due to the Emscripten new version (3.1.33), i needed to update the ImGui version from 1.84.3 to 1.88.4.
+
 ## Building
 
 To build the project, you need to use a UNIX system, like Ubuntu or if you're on Windows you can use WSL.
