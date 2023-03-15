@@ -36,7 +36,7 @@ Click on the images to watch the video.
 - stb (2.28)
 
 > **Note**  
-> Due to the Emscripten new version (3.1.33), i needed to update the ImGui version from 1.84.3 to 1.88.4.
+> Due to the Emscripten new version (3.1.33), I needed to update the ImGui version from 1.84.3 to 1.88.4.
 
 ## Building
 
