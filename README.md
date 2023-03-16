@@ -89,14 +89,11 @@ The speed and some parameters can be modified directly in the ImGui windows.
 
 | Action              | Key                                 |
 |---------------------|-------------------------------------|
-| Translate camera    | WASD (← → ↑ ↓)                      |
+| Translate camera    | (WASD) or (↑ ← ↓ →)                 |
 | Pause/Resume        | P                                   |
-| Move up/down camera | SPACE/SHIFT                         |
+| Move up/down camera | (Space/Shift) or (Page up/down)     |
 | Rotate camera       | Right Mouse Button + Mouse movement |
 | Fullscreen          | F11                                 |
-| Drag particles      | Left Mouse Button + Mouse movement  |
-
-The keybinding is made for a QWERTY keyboard.
 
 ## GitHub Actions
 
