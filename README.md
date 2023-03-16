@@ -154,7 +154,7 @@ unrealistic.dev (Change CMake working directory):
 OpenGL ES 2.0 Reference Pages:  
 <https://www.khronos.org/registry/OpenGL-Refpages/es2.0/>
 
-Wikipedia (OpenGL versions):
+Wikipedia (OpenGL versions):  
 <https://en.wikipedia.org/wiki/OpenGL_Shading_Language>
 
 ## Contributors
