@@ -4,11 +4,11 @@
 
 #include "ballImage.h"
 
-const char* vertexShader="#version 300 es\n"
+const char* vertexShader = "#version 300 es\n"
                            "\n"
                            "precision mediump float;\n"
                            "\n"
-                           "layout (location = 0) in vec3 a_vertice;\n"
+                           "layout (location = 0) in vec3 a_vertex;\n"
                            "layout (location = 1) in vec3 a_position;\n"
                            "layout (location = 2) in vec2 a_scale;\n"
                            "layout (location = 3) in vec4 a_color;\n"
@@ -23,14 +23,14 @@ const char* vertexShader="#version 300 es\n"
                            "void main()\n"
                            "{\n"
                            "\tvec3 billboardPos = a_position\n"
-                           "\t+ u_cameraRight * a_vertice.x * a_scale.x\n"
-                           "\t+ u_cameraUp * a_vertice.y * a_scale.y;\n"
+                           "\t+ u_cameraRight * a_vertex.x * a_scale.x\n"
+                           "\t+ u_cameraUp * a_vertex.y * a_scale.y;\n"
                            "\tgl_Position = u_mvp * vec4(billboardPos, 1.0);\n"
-                           "\tv_UV = a_vertice.xy + vec2(0.5, 0.5);\n"
+                           "\tv_UV = a_vertex.xy + vec2(0.5, 0.5);\n"
                            "\tv_color = a_color;\n"
                            "}\n\0";
 
-const char* fragmentShader="#version 300 es\n"
+const char* fragmentShader = "#version 300 es\n"
                              "\n"
                              "precision mediump float;\n"
                              "\n"
@@ -90,6 +90,8 @@ void ParticleGeneratorBillboard::create() {
     glVertexAttribDivisor(1, 1); // tell OpenGL this is an instanced vertex attribute.
     glVertexAttribDivisor(2, 1);
     glVertexAttribDivisor(3, 1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
 }
