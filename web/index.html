@@ -18,10 +18,13 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    // Disable the context menu on the canvas
     canvas.addEventListener('contextmenu', (event) => {
         event.preventDefault();
     }, {passive: false});
 
+    // Define the Module object that Emscripten will use to access the canvas
+    // Can't use const or let here because the Module object is used by Emscripten
     var Module = {
         canvas: (() => {
             return document.getElementById('canvas');
@@ -30,7 +33,7 @@
 
     // Add event listener to window object to resize canvas on window resize
     window.addEventListener('resize', () => {
-        var canvas = Module.canvas;
+        const canvas = Module.canvas;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });

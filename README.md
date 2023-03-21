@@ -1,9 +1,10 @@
 # particle-system-webgl
 
 <p align="center">
-      <img src="https://user-images.githubusercontent.com/59691442/183268126-b3d19e66-8f2d-463a-805e-ae6ef7cc6c01.png" alt="cmakeLogo" style="height:60px;"/>
       <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="cppLogo" style="height:60px;"/>
       <img src="https://img.shields.io/badge/OpenGL-FFFFFF?style=for-the-badge&logo=opengl" alt="openglLogo" style="height:60px;"/>
+      <img src="https://user-images.githubusercontent.com/59691442/183268126-b3d19e66-8f2d-463a-805e-ae6ef7cc6c01.png" alt="cmakeLogo" style="height:60px;"/>
+      <img src="https://user-images.githubusercontent.com/59691442/226524871-c73aa62f-d191-42d3-a1b9-ebbfc216a7bb.png" alt="webglLogo" style="height:60px;"/>
       <img src="https://user-images.githubusercontent.com/59691442/190315147-ec9dc33f-0090-4f0d-98ab-514eb1463e01.png" alt="glfwLogo" style="height:60px;"/>
 </p>
 
@@ -151,8 +152,8 @@ learnopengl (OpenGL tutorial):
 unrealistic.dev (Change CMake working directory):  
 <https://unrealistic.dev/posts/setting-debug-parameters-with-cmake-tools-for-visual-studio>
 
-OpenGL ES 2.0 Reference Pages:  
-<https://www.khronos.org/registry/OpenGL-Refpages/es2.0/>
+OpenGL ES 3.0 Reference Pages:  
+<https://www.khronos.org/registry/OpenGL-Refpages/es3.0/>
 
 Wikipedia (OpenGL versions):  
 <https://en.wikipedia.org/wiki/OpenGL_Shading_Language>
