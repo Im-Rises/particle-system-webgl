@@ -24,10 +24,18 @@ private:
 
     static constexpr std::array<float, 12> vertices = {
         // positions
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        -0.5f,  0.5f, 0.0f,
-        0.5f,  0.5f, 0.0f,
+        -0.5f,
+        -0.5f,
+        0.0f,
+        0.5f,
+        -0.5f,
+        0.0f,
+        -0.5f,
+        0.5f,
+        0.0f,
+        0.5f,
+        0.5f,
+        0.0f,
     };
 
     struct Particle {
@@ -82,7 +90,7 @@ public:
     float maxColorAlpha = 1.0f;
 
 public:
-    explicit ParticleGeneratorBillboard(int maxParticles = 50000);
+    explicit ParticleGeneratorBillboard(int particlesCount = 10000);
     void create();
     ~ParticleGeneratorBillboard();
     void destroy();
