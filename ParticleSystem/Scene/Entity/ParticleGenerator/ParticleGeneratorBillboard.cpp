@@ -1,7 +1,7 @@
 #include "ParticleGeneratorBillboard.h"
 
 #include <algorithm>
-
+#include <glad/glad.h>
 #include "ballImage.h"
 
 const char* vertexShader = R"(#version 300 es

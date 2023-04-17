@@ -2,7 +2,6 @@
 #define PARTICLE_GENERATOR_H
 
 #include <vector>
-#include <glad/include/glad/glad.h>
 #include <glm/glm.hpp>
 #include <array>
 #include <vector>
