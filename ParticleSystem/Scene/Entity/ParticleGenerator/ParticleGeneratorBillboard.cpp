@@ -1,60 +1,80 @@
 #include "ParticleGeneratorBillboard.h"
 
 #include <algorithm>
-
+#include <glad/glad.h>
 #include "ballImage.h"
 
-const char* vertexShader = "#version 300 es\n"
-                           "\n"
-                           "precision mediump float;\n"
-                           "\n"
-                           "layout (location = 0) in vec3 a_vertex;\n"
-                           "layout (location = 1) in vec3 a_position;\n"
-                           "layout (location = 2) in vec2 a_scale;\n"
-                           "layout (location = 3) in vec4 a_color;\n"
-                           "\n"
-                           "out vec2 v_UV;\n"
-                           "out vec4 v_color;\n"
-                           "\n"
-                           "uniform mat4 u_mvp;\n"
-                           "uniform vec3 u_cameraRight;\n"
-                           "uniform vec3 u_cameraUp;\n"
-                           "\n"
-                           "void main()\n"
-                           "{\n"
-                           "\tvec3 billboardPos = a_position\n"
-                           "\t+ u_cameraRight * a_vertex.x * a_scale.x\n"
-                           "\t+ u_cameraUp * a_vertex.y * a_scale.y;\n"
-                           "\tgl_Position = u_mvp * vec4(billboardPos, 1.0);\n"
-                           "\tv_UV = a_vertex.xy + vec2(0.5, 0.5);\n"
-                           "\tv_color = a_color;\n"
-                           "}\n\0";
+const char* vertexShader = R"(#version 300 es
 
-const char* fragmentShader = "#version 300 es\n"
-                             "\n"
-                             "precision mediump float;\n"
-                             "\n"
-                             "in vec2 v_UV;\n"
-                             "in vec4 v_color;\n"
-                             "\n"
-                             "out vec4 o_fragColor;\n"
-                             "\n"
-                             "uniform sampler2D u_texture;\n"
-                             "\n"
-                             "void main() {\n"
-                             "\to_fragColor = texture(u_texture, v_UV);\n"
-                             "\tif (o_fragColor.a < 0.1)\n"
-                             "\tdiscard;\n"
-                             "\to_fragColor = v_color;\n"
-                             "}\n\0";
+precision mediump float;
 
-ParticleGeneratorBillboard::ParticleGeneratorBillboard(int maxParticles) : Entity(vertexShader,
-                                                                               fragmentShader),
-                                                                           texture(ballImage, ballImageSize),
-                                                                           randomEngine(std::random_device()()) {
+layout (location = 0) in vec3 a_vertex;
+layout (location = 1) in vec3 a_position;
+layout (location = 2) in vec2 a_scale;
+layout (location = 3) in vec4 a_color;
+
+out vec2 v_UV;
+out vec4 v_color;
+
+uniform mat4 u_mvp;
+uniform vec3 u_cameraRight;
+uniform vec3 u_cameraUp;
+
+void main()
+{
+    vec3 billboardPos = a_position
+    + u_cameraRight * a_vertex.x * a_scale.x
+    + u_cameraUp * a_vertex.y * a_scale.y;
+    gl_Position = u_mvp * vec4(billboardPos, 1.0);
+    v_UV = a_vertex.xy + vec2(0.5, 0.5);
+    v_color = a_color;
+}
+)";
+
+// const char* fragmentShader = "#version 300 es\n"
+//                              "\n"
+//                              "precision mediump float;\n"
+//                              "\n"
+//                              "in vec2 v_UV;\n"
+//                              "in vec4 v_color;\n"
+//                              "\n"
+//                              "out vec4 o_fragColor;\n"
+//                              "\n"
+//                              "uniform sampler2D u_texture;\n"
+//                              "\n"
+//                              "void main() {\n"
+//                              "\to_fragColor = texture(u_texture, v_UV);\n"
+//                              "\tif (o_fragColor.a < 0.1)\n"
+//                              "\tdiscard;\n"
+//                              "\to_fragColor = v_color;\n"
+//                              "}\n\0";
+
+const char* fragmentShader = R"(#version 300 es
+
+precision mediump float;
+
+in vec2 v_UV;
+in vec4 v_color;
+
+out vec4 o_fragColor;
+
+uniform sampler2D u_texture;
+
+void main() {
+    o_fragColor = texture(u_texture, v_UV);
+    if (o_fragColor.a < 0.1)
+    discard;
+    o_fragColor = v_color;
+}
+)";
+
+ParticleGeneratorBillboard::ParticleGeneratorBillboard(int particlesCount) : Entity(vertexShader,
+                                                                                 fragmentShader),
+                                                                             texture(ballImage, ballImageSize),
+                                                                             randomEngine(std::random_device()()) {
     // Init particles
     position = glm::vec3(0.0f, 0.0f, 0.0f);
-    particlesCount = maxParticles;
+    this->particlesCount = particlesCount;
     particles.resize(particlesCount);
     resetParticles();
     // Init opengl buffers
