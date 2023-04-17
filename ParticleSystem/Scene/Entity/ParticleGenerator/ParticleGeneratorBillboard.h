@@ -90,7 +90,12 @@ public:
     float maxColorAlpha = 1.0f;
 
 public:
+#ifdef __EMSCRIPTEN__
     explicit ParticleGeneratorBillboard(int particlesCount = 10000);
+#else
+    explicit ParticleGeneratorBillboard(int particlesCount = 25000);
+#endif
+
     void create();
     ~ParticleGeneratorBillboard();
     void destroy();
