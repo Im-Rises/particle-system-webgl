@@ -6,7 +6,7 @@
 
 constexpr const std::string_view PROJECT_NAME = "Particle System WebGl";
 
-constexpr const std::string_view PROJECT_VERSION = "1.2.0";
+constexpr const std::string_view PROJECT_VERSION = "1.4.0";
 
 constexpr const std::string_view PROJECT_GITHUB = "https://github.com/Im-Rises/ParticleSystem";
 
