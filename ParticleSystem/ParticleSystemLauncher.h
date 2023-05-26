@@ -20,7 +20,7 @@ class ParticleSystemLauncher {
 private:
     GLFWwindow* window;
     int display_w = 1280, display_h = 720;
-    float fixedDeltaTime = 1.0F/50.0F
+    float fixedDeltaTime = 1.0F / 50.0F;
 
     std::unique_ptr<Scene> scene;
 
