@@ -19,6 +19,7 @@ public:
 public:
     Scene(int display_w, int display_h);
     ~Scene();
+    void fixedUpdate(float deltaTime);
     void update(float deltaTime);
     void render();
 
