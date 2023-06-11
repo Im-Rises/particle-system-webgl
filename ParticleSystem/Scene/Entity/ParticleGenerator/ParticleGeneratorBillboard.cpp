@@ -133,8 +133,8 @@ void ParticleGeneratorBillboard::update(float deltaTime) {
 
         if (particles[i].lifeTime > 0)
         {
-            particles[i].velocity += sumForces * deltaTime;
-            particles[i].position += particles[i].velocity * deltaTime;
+            particles[i].velocity += sumForces * deltaTime; // F = a
+            particles[i].position += particles[i].velocity * deltaTime + 0.5F * sumForces * deltaTime * deltaTime;
         }
         else
         {
