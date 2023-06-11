@@ -172,12 +172,12 @@ void ParticleSystemLauncher::start() {
 
         handleUi(deltaTime);
 
+        accumulator += deltaTime;
         while (accumulator >= fixedDeltaTime)
         {
             fixedUpdateGame(fixedDeltaTime);
             accumulator -= fixedDeltaTime;
         }
-        accumulator += deltaTime;
 
         updateGame(deltaTime);
 
